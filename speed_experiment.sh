@@ -1,0 +1,22 @@
+date 
+
+CONFIGURATION_PATH=$1
+FILE_PATH=$2
+RESULTS_ROOT=$3
+
+mkdir -p $RESULTS_ROOT
+
+STATE_PATH=$RESULTS_ROOT/state.pth
+DECODED_PATH=$RESULTS_ROOT/decoded.png
+STATS_PATH=$RESULTS_ROOT/stats.json
+
+python3 fit.py $CONFIGURATION_PATH $FILE_PATH $STATE_PATH
+python3 infer.py $CONFIGURATION_PATH $STATE_PATH $DECODED_PATH
+
+python3 filewise_export_stats.py \
+    $FILE_PATH \
+    $DECODED_PATH \
+    $STATS_PATH \
+    $STATE_PATH
+
+date

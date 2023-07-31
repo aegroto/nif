@@ -1,0 +1,73 @@
+model:
+  hidden_sizes: [120, 40, 28, 16]
+  encoder_params:
+    num_frequencies: 16
+  modulator_params:
+    hidden_sizes: [16, 8]
+    encoder_params:
+      num_frequencies: 4
+fitting:
+  steps: 10
+  tuning:
+    iterations: 150
+    patching: 1
+    log_interval: 150
+    image_dump_interval: 100000
+    loss:
+      components:
+        - type: log_cosh
+          weight: 1
+        - type: ssim
+          weight: 0.01
+    optimizer:
+      lr: 0.001
+      weight_decay: 0.0001
+    scheduler:
+      warmup_iterations: 20
+      p: 1
+      T_0: 150
+      T_mult: 1
+      eta_min: 0.0006
+      peak_decay_factor: 0.99
+  restart:
+    amount:
+      start: 0.125
+      end: 0.7
+      smoothing: 0.05
+    range:
+      start: 0.9
+      end: 0.2
+      smoothing: 0.2
+quantization:
+  steps: 5
+  restart:
+    amount:
+      start: 0.005
+      end: 0.005
+      smoothing: 1
+    range:
+      start: 0
+      end: 0.005
+      smoothing: 1
+  default:
+    bits: 8
+  tuning:
+    iterations: 40
+    patching: 1
+    log_interval: 40
+    image_dump_interval: 100000
+    loss:
+      components:
+        - type: log_cosh
+          weight: 1
+        - type: ssim
+          weight: 0.01
+    optimizer:
+      lr: 0.00005
+    scheduler:
+      warmup_iterations: 5
+      p: 1
+      T_0: 40
+      T_mult: 1
+      eta_min: 0.00002
+

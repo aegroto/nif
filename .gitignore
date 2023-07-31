@@ -1,0 +1,6 @@
+**/*.pyc
+
+runs/
+
+tune_results/
+.env/

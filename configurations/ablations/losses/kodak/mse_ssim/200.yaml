@@ -1,0 +1,21 @@
+model:
+  hidden_sizes: [200, 64, 40, 20]
+  modulator_params:
+    hidden_sizes: [64, 16, 8]
+
+fitting:
+  tuning:
+    patching: 2
+    loss: &loss
+      components:
+        - type: mse
+          weight: 1
+        - type: ssim
+          weight: 0.01
+
+quantization:
+  tuning:
+    patching: 2
+    loss: *loss
+
+

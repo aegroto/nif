@@ -1,0 +1,22 @@
+date 
+
+CONFIGURATION_PATH=$1
+FILE_PATH=$2
+RESULTS_ROOT=$3
+
+mkdir -p $RESULTS_ROOT
+
+COMPRESSED_PATH=$RESULTS_ROOT/compressed.nif
+DECODED_PATH=$RESULTS_ROOT/decoded.png
+STATS_PATH=$RESULTS_ROOT/stats.json
+
+python3 encode.py $CONFIGURATION_PATH $FILE_PATH $COMPRESSED_PATH
+python3 decode.py $CONFIGURATION_PATH $COMPRESSED_PATH $DECODED_PATH
+
+python3 filewise_export_stats.py \
+    $FILE_PATH \
+    $DECODED_PATH \
+    $STATS_PATH \
+    $COMPRESSED_PATH
+
+date

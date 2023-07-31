@@ -1,0 +1,14 @@
+model:
+  hidden_sizes: [64, 32, 24, 24]
+  encoder_params:
+    num_frequencies: 12
+  modulator_params:
+    disabled: True
+
+fitting:
+  tuning:
+    log_interval: 10
+    iterations: &epoch_iterations 300
+    scheduler:
+      T_0: *epoch_iterations
+ 

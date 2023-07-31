@@ -1,0 +1,30 @@
+model:
+  hidden_sizes: [360, 150, 70, 32]
+  encoder_params:
+    use_cache: False
+  modulator_params:
+    hidden_sizes: [64, 16, 8]
+    encoder_params:
+      use_cache: False
+
+fitting:
+  steps: 5
+  tuning:
+    iterations: 30
+    patching: 16
+    log_interval: 1
+    scheduler:
+      warmup_iterations: 3
+      T_0: 30
+
+quantization:
+  steps: 5
+  tuning:
+    iterations: 5
+    patching: 16
+    log_interval: 1
+    scheduler:
+      warmup_iterations: 2
+      T_0: 5
+
+

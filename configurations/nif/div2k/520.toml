@@ -1,0 +1,83 @@
+[model]
+scale = 1
+omega = 30.0
+c = 6.0
+hidden_sizes = [520, 200, 60, 30]
+encoder_params = { scale = 1.4, num_frequencies = 16 }
+
+[model.modulator_params]
+output_features = 1
+omega = 30.0
+sigma = 10.0
+hidden_sizes = [128, 32, 16]
+encoder_params = { scale = 1.4, num_frequencies = 4 }
+
+[pruning]
+steps = 5
+amount = 0.0
+smoothing = 1.0
+
+[pruning.tuning]
+iterations = 50
+patching = 8
+log_interval = 1
+image_dump_interval = 10000
+
+[[pruning.tuning.loss.components]]
+type = "log_cosh"
+weight = 1.0
+
+[[pruning.tuning.loss.components]]
+type = "ssim"
+weight = 0.01
+
+[pruning.restart]
+amount = { start = 0.125, end = 0.4, smoothing = 0.05 }
+range = { start = 0.3, end = 0.1, smoothing = 0.2 }
+
+[pruning.tuning.optimizer]
+lr = 5e-4
+weight_decay = 1e-4
+
+[pruning.tuning.scheduler]
+warmup_iterations = 10
+p = 1.0
+T_0 = 50
+T_mult = 1
+eta_min = 2e-4
+peak_decay_factor = 0.99
+
+[quantization]
+steps = 5
+
+[quantization.restart]
+amount = { start = 0.005, end = 0.005, smoothing = 1.0 }
+range = { start = 0.0, end = 0.005, smoothing = 1.0 }
+
+[quantization.default]
+bits = 8
+
+[quantization.tuning]
+iterations = 10
+patching = 8
+log_interval = 1
+image_dump_interval = 1000
+
+[[quantization.tuning.loss.components]]
+type = "log_cosh"
+weight = 1.0
+
+[[quantization.tuning.loss.components]]
+type = "ssim"
+weight = 0.01
+
+[quantization.tuning.optimizer]
+lr = 5e-5
+
+[quantization.tuning.scheduler]
+warmup_iterations = 3
+p = 1.0
+T_0 = 10
+T_mult = 1
+eta_min = 2e-5
+

@@ -1,0 +1,13 @@
+model:
+  hidden_sizes: [128, 128, 128, 128]
+  modulator_params:
+    hidden_sizes: [32, 32, 32]
+
+fitting:
+  tuning:
+    patching: 2
+
+quantization:
+  tuning:
+    patching: 2
+
