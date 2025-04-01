@@ -1,0 +1,7 @@
+[project]
+name = "nif"
+version = "0.2.0"
+description = "NIF: Neural Imaging Format (ACMMM 2023)"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []
