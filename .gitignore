@@ -4,3 +4,5 @@ runs/
 
 tune_results/
 .env/
+
+schedule.sh
