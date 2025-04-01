@@ -1,7 +1,7 @@
 # NIF: Neural Imaging Format [ACMMM '23]
 [**[Paper]**](https://dl.acm.org/doi/pdf/10.1145/3581783.3613834)
 [**[Project Page]**](https://iplab.dmi.unict.it/nif/)
-[**[Full results]**](https://cutt.ly/nif-mm23-results) 
+[**[Full results]**](https://cutt.ly/nif-mm23-reproducibility-2025update) 
 [**[Poster]**](https://iplab.dmi.unict.it/nif/poster.pdf)
 
 This repository contains the source code used in experimental evaluations for the paper "NIF: A Fast Implicit Image Compression with Bottleneck Layers and Modulated Sinusoidal Activations".
