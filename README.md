@@ -6,39 +6,34 @@
 
 This repository contains the source code used in experimental evaluations for the paper "NIF: A Fast Implicit Image Compression with Bottleneck Layers and Modulated Sinusoidal Activations".
 
+**04/2025:** Updated with reproducibility improvements and novel environment setup
+
 # Environment setup
-To create a virtual environment and to install necessary dependencies use:
-
-```
-python3 -m venv .env
-source .env/bin/activate
-pip3 install -r requirements.txt 
-```
-
-The ```source .env/bin/activate``` command should be always given at the beginning of a shell session, before executing any script, to enable the virtual environment with all necessary dependencies.
+The Python environment can be handled using [uv](https://docs.astral.sh/uv/#installation). 
+Interpreter and requirements will be automatically installed when necessary.
 
 # Reproducing experiments
 ## Single image
 To encode a single image run the ```encode.py``` scripts:
 
 ```
-python3 encode.py <CONFIGURATION_PATH> <INPUT_IMAGE> <COMPRESSED_IMAGE>
+uv run -m encode.py <CONFIGURATION_PATH> <INPUT_IMAGE> <COMPRESSED_IMAGE>
 ```
 
 For example, to encode the image \#3 from the Kodak dataset located at "test_images/kodak/3.png" and save it at "kodim03.nif" run:
 ```
-python3 encode.py configurations/nif/kodak/120.yaml test_images/kodak/3.png kodim03.nif
+uv run -m encode configurations/nif/kodak/120.yaml test_images/kodak/3.png kodim03.nif
 ```
 
 Analogously, you can decode a compressed image using the ```decode.py``` script:
 
 ```
-python3 decode.py <CONFIGURATION_PATH> <COMPRESSED_IMAGE> <DECOMPRESSED_IMAGE> 
+uv run -m decode <CONFIGURATION_PATH> <COMPRESSED_IMAGE> <DECOMPRESSED_IMAGE> 
 ```
 
 To decompress the image encoded in the example above, use:
 ```
-python3 decode.py configurations/nif/kodak/120.yaml kodim03.nif kodim03_decoded.png
+uv run -m decode configurations/nif/kodak/120.yaml kodim03.nif kodim03_decoded.png
 ```
 
 Input files should be encoded in lossless PNG format.
@@ -55,19 +50,22 @@ For instance, to generate a "schedule.sh" to reproduce experiments on Kodak use:
 
 Then execute it with ```./schedule.sh```.
 
-If you want to perform a full encode-decode experiment on a single image and to export stats, you can use the "experiment.sh" script as follows:
+If you want to perform a full encode-decode experiment on a single image and to export stats, on Linux/MacOS systems you can use the "experiment.sh" script as follows:
 
 ```
-./experiment.sh <CONFIGURATION_PATH> <INPUT_IMAGE> <OUTPUT_FOLDER>
+uv run bash experiment.sh <CONFIGURATION_PATH> <INPUT_IMAGE> <OUTPUT_FOLDER>
 ```
 
 The compressed and then decoded images, along with stats saved in JSON, will be exported in the indicated output folder.
 
 ## Downloading datasets
+### Kodak
 The kodak dataset is included in this repository, along with compressed ".nif" files that can be decoded using this software.
 
+### CelebA
 The sample from CelebA is the same used by Strumpler et al [2022]. To download it, follow the instructions at https://github.com/YannickStruempler/inr_based_compression/#datasets.
 
+### ICB
 The ICB dataset can be downloaded at http://imagecompression.info/test_images/rgb8bit.zip. It is necessary to convert it to PNG, for this conversion we have used [ImageMagick](imagemagick.org):
 
 ```
