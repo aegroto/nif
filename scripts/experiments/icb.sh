@@ -8,9 +8,7 @@ do
     do
         basename=$(basename $file)
         i=${basename%.*}
-
-        log_file="logs/${config_id}_$i.txt"
-        echo "./experiment.sh $config test_images/icb/$i.png results/nif/icb/$config_id/$i > $log_file 2>&1" >> schedule.sh
+        echo "uv run bash experiment.sh $config test_images/icb/$i.png results/nif/icb/$config_id/$i" >> schedule.sh
     done
 done
 
