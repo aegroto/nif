@@ -64,10 +64,19 @@ The kodak dataset is included in this repository, along with compressed ".nif" f
 
 ### CelebA
 The sample from CelebA is the same used by Strumpler et al [2022]. To download it, follow the instructions at https://github.com/YannickStruempler/inr_based_compression/#datasets.
+Alternatively, after downloading the .zip archives from the official Google Drive, run the following bash script:
+
+```
+./scripts/datasets/celeba.sh <CELEBA_DOWNLOAD_FOLDER>
+```
+
+Where `CELEBA_DOWNLOAD_FOLDER` contains the .zip archives.
 
 ### ICB
 The ICB dataset can be downloaded at http://imagecompression.info/test_images/rgb8bit.zip. It is necessary to convert it to PNG, for this conversion we have used [ImageMagick](imagemagick.org):
 
 ```
-    magick <input_file>.ppm <output_file>.png
+magick <input_file>.ppm <output_file>.png
 ```
+
+A bash script to automate the process is provided in `./scripts/datasets/icb.sh`
