@@ -1,6 +1,6 @@
 > schedule.sh
 
-for config in $(find configurations/ablations/celeba_equal_layers/*.yaml)
+for config in $(find configurations/nif/celeba/*.yaml)
 do
     config_file=$(basename $config)
     config_id="${config_file%.yaml}"
@@ -10,6 +10,6 @@ do
         i=${basename%.*}
 
         log_file="logs/${config_id}_$i.txt"
-        echo "./experiment.sh $config test_images/celeba/$i.png results/nif/celeba_equal_layers/$config_id/$i > $log_file 2>&1" >> schedule.sh
+        echo "uv run bash experiment.sh $config test_images/celeba/$i.png results/nif/celeba/$config_id/$i" >> schedule.sh
     done
 done

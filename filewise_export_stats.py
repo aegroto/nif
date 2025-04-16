@@ -78,7 +78,7 @@ def main():
 
     print(stats)
 
-    json.dump(stats, open(stats_path, "w"))
+    json.dump(stats, open(stats_path, "w"), indent=4)
 
 if __name__ == "__main__":
     main()

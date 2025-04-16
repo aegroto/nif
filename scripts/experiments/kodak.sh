@@ -7,6 +7,6 @@ do
     for i in {1..24}
     do
         log_file="logs/${config_id}_$i.txt"
-        echo "./experiment.sh $config test_images/kodak/$i.png results/nif/kodak/$config_id/$i > $log_file 2>&1" >> schedule.sh
+        echo "uv run bash experiment.sh $config test_images/kodak/$i.png results/nif/kodak/$config_id/$i" >> schedule.sh
     done
 done

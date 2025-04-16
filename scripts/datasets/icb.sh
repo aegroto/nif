@@ -1,16 +1,12 @@
-> schedule.sh
+FOLDER=test_images/icb/
+rm -rf $FOLDER
+mkdir -p $FOLDER
 
-for config in $(find configurations/nif/icb/*.yaml)
-do
-    config_file=$(basename $config)
-    config_id="${config_file%.yaml}"
-    for file in test_images/icb/*.png
-    do
-        basename=$(basename $file)
-        i=${basename%.*}
+wget http://imagecompression.info/test_images/rgb8bit.zip
+mv rgb8bit.zip $FOLDER
+cd $FOLDER
+unzip rgb8bit.zip
+rm readme.txt rgb8bit.zip
 
-        log_file="logs/${config_id}_$i.txt"
-        echo "./experiment.sh $config test_images/icb/$i.png results/nif/icb/$config_id/$i > $log_file 2>&1" >> schedule.sh
-    done
-done
-
+magick mogrify -format png *.ppm
+rm *.ppm
