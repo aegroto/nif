@@ -6,7 +6,9 @@
 
 This repository contains the source code used in experimental evaluations for the paper "NIF: A Fast Implicit Image Compression with Bottleneck Layers and Modulated Sinusoidal Activations".
 
-**04/2025:** Updated with reproducibility improvements and novel environment setup
+**06/2026: The NIF25 preview has been released! Check-out the [pre-print](https://doi.org/10.36227/techrxiv.175021904.44376980/v1) and the [source code](https://github.com/aegroto/nif25).**
+
+*04/2025:* Updated with reproducibility improvements and novel environment setup
 
 # Environment setup
 The Python environment can be handled using [uv](https://docs.astral.sh/uv/#installation). 
