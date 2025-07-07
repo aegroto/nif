@@ -91,3 +91,11 @@ magick <input_file>.ppm <output_file>.png
 ```
 
 A bash script to automate the process is provided in `./scripts/datasets/icb.sh`
+
+# Paper plots map
+
+| Figure number | Generation script |
+|-------------|---------|
+| 3 (top plot) | inr_kodak |
+| 3 (bottom plot) | inr_celeba |
+| 4 | traditional_kodak |

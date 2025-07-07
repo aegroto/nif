@@ -15,4 +15,3 @@ cd scripts/plots/
 uv run -m inr_kodak
 uv run -m inr_celeba
 uv run -m traditional_kodak
-uv run -m traditional_icb
