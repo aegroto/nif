@@ -1,3 +1,28 @@
+"""
+This module defines the Neural Imaging Format (NIF) model, which is a neural network architecture
+designed for representing implicit image functions. The NIF model leverages sinusoidal
+activation functions and a positional encoder to map input features to a higher-dimensional space,
+followed by a series of linear layers and a modulator to control the frequency of the sinusoidal
+activations.
+
+Classes:
+    NIF: The main class for the NIF model.
+
+Functions:
+    None
+
+Dependencies:
+    torch: PyTorch library for tensor computations.
+    nn: PyTorch neural network module.
+    build_dumper: Utility function to build a dumper for logging.
+    Modulator: Module for modulating the input features.
+    IdentityModulator: A no-op modulator for disabled modulation.
+    PositionalEncoder: Configurable PyTorch module that performs Positional Encoding (PE).
+    Sine: Sinusoidal activation function.
+    build_linear_initializer: Utility function to build a SIREN layer initializer.
+    initialize_first_layer: Utility function to initialize the first layer of the SIREN.
+"""
+
 import torch
 
 from torch import nn
