@@ -3,6 +3,20 @@ from torch import nn
 from modules.siren.utils import Sine, build_linear_initializer, initialize_first_layer
 
 class Siren(nn.Module):
+    """
+    Implementation of the SIREN architecture (Sitzmann et al., 2021)
+
+    Attributes:
+        omega (float): The frequency parameter for the Sine activation function.
+        in_size (int): The size of the input layer.
+        out_size (int): The size of the output layer.
+        hidden_size (int): The size of each hidden layer.
+        hidden_layers (int): The number of hidden layers in the network.
+        final_activation (bool): Whether to apply the activation function in the final layer.
+
+    Methods:
+        forward(x): Performs a forward pass through the network.
+    """
     def __init__(self, 
         omega,
         in_size, 

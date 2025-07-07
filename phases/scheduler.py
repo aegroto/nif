@@ -2,6 +2,20 @@ import math
 import torch
 
 class CustomScheduler(torch.optim.lr_scheduler._LRScheduler):
+    """
+    Learning rate scheduler that implements the strategy presented in Section 3.1.6.
+
+    Args:
+        optimizer (torch.optim.Optimizer): The optimizer to schedule.
+        T_0 (int): The number of iterations for the first restart.
+        warmup_iterations (int, optional): Number of warmup iterations. Defaults to 0.
+        peak_decay_factor (float, optional): Peak decay factor. Defaults to 1.0.
+        p (float, optional): Exponent for smoothing. Defaults to 1.0.
+        T_mult (int, optional): A factor increases T_i after a restart. Defaults to 1.
+        eta_min (float, optional): Minimum learning rate. Defaults to 0.
+        last_epoch (int, optional): The index of the last epoch. Defaults to -1.
+        verbose (bool, optional): If True, prints update messages. Defaults to False.
+    """
     def __init__(self, optimizer, T_0, warmup_iterations=0, peak_decay_factor=1.0, p=1.0, T_mult=1, eta_min=0, last_epoch=-1, verbose=False):
         if T_0 <= 0 or not isinstance(T_0, int):
             raise ValueError("Expected positive integer T_0, but got {}".format(T_0))

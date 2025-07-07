@@ -1,10 +1,16 @@
 import math
 import torch
-from modules.siren.utils import build_linear_initializer, initialize_first_layer
 from utils import linear_reduction
 
 def restart_weights(model, amount, range):
-    # initializer = build_linear_initializer(model.c, model.omega)
+    """
+    Perform the weights restart (perturbation) of the NIF model as described in Section 3.1.5.
+
+    Args:
+        model (torch.nn.Module): The model whose weights are to be restarted.
+        amount (float): The amount of weight restarting.
+        range (float): The range of weight restarting.
+    """
     for (name, module) in model.named_modules():
         if "head" in name:
             continue
@@ -18,6 +24,15 @@ def restart_weights(model, amount, range):
             module.weight.add_(current_weight)
 
 def perform_restart_step(model, restart_config, progress, verbose=False):
+    """
+    Performs a restart step for the model based on the restart configuration and progress.
+
+    Args:
+        model (torch.nn.Module): The model to be restarted.
+        restart_config (dict): Configuration dictionary for restarting.
+        progress (float): The progress of training.
+        verbose (bool, optional): If True, prints restart details. Defaults to False.
+    """
     amount_vars = restart_config["amount"]
     range_vars = restart_config["range"]
     restart_amount = linear_reduction(amount_vars["start"], amount_vars["end"], math.pow(progress, amount_vars["smoothing"]))

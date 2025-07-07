@@ -14,6 +14,15 @@ This repository contains the source code used in experimental evaluations for th
 The Python environment can be handled using [uv](https://docs.astral.sh/uv/#installation). 
 Interpreter and requirements will be automatically installed when necessary.
 
+## System requirements
+To run this application, it is suggested to use the following system and hardware:
+
+| Requirement | Version |
+|-------------|---------|
+| Operating System | Linux (Ubuntu 18.04 or later recommended) |
+| Python | 3.10 |
+| CUDA | 11.1 or later |
+
 # Reproducing experiments
 ## Single image
 To encode a single image run the ```encode.py``` scripts:
@@ -47,7 +56,7 @@ To reproduce the experiments discussed in the paper, run the corresponding scrip
 For instance, to generate a "schedule.sh" to reproduce experiments on Kodak use:
 
 ```
-./scripts/datasets/kodak.sh
+./scripts/experiments/kodak.sh
 ```
 
 Then execute it with ```./schedule.sh```.
@@ -82,3 +91,11 @@ magick <input_file>.ppm <output_file>.png
 ```
 
 A bash script to automate the process is provided in `./scripts/datasets/icb.sh`
+
+# Paper plots map
+
+| Figure number | Generation script |
+|-------------|---------|
+| 3 (top plot) | inr_kodak |
+| 3 (bottom plot) | inr_celeba |
+| 4 | traditional_kodak |

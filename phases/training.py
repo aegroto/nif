@@ -1,24 +1,15 @@
-import statistics
-import numpy as np
-import skimage
-import sys
 import math
 import copy
 import time
 from losses import build_loss_fn
 
-import utils
 
 import torch
-from losses.composite import CompositeLoss
-from losses.log_cosh import LogCoshLoss
-from losses.ssim import DMS_SSIMLoss, DSSIMLoss
 
-from losses.psnr import PSNREvaluationMetric, psnr
-from phases.reset import restart_weights
+from losses.psnr import psnr
 from phases.scheduler import CustomScheduler
 
-from utils import cast_for_dump, clearlines, pad_for_patching, printdots
+from utils import cast_for_dump, clearlines, printdots
 
 class TrainingContext:
     def __init__(self):
@@ -27,12 +18,33 @@ class TrainingContext:
         self.scheduler = None
 
 def eval_psnr(reconstructed_image, image):
+    """
+    Evaluates the Peak Signal-to-Noise Ratio (PSNR) between the reconstructed image and the original image.
+
+    Args:
+        reconstructed_image (torch.Tensor): The reconstructed image.
+        image (torch.Tensor): The original image.
+
+    Returns:
+        float: The PSNR value.
+    """
     return psnr(
         reconstructed_image.div(2.0).add(0.5), 
         image.div(2.0).add(0.5), 
     1.0)
 
 def patched_forward(model, grid_patches, patching):
+    """
+    Performs a forward pass through the model that takes into account patching (Section 3.1.7).
+
+    Args:
+        model (torch.nn.Module): The model to be used for reconstruction.
+        grid_patches (list): List of grid patches.
+        patching (int): The patching factor.
+
+    Returns:
+        torch.Tensor: The reconstructed image.
+    """
     reconstructed_patches = list()
     for grid_patch in grid_patches:
         reconstructed_image_patch = model(grid_patch)

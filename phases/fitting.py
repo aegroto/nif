@@ -21,6 +21,20 @@ def batch_image(image, patching):
     return batched_image
 
 def fit_with_config(config, model, grid, image, verbose = False, writer = None):
+    """
+    Trains a NIF model using the provided configuration, grid, and image.
+
+    Args:
+        config (dict): Configuration dictionary containing training parameters.
+        model (torch.nn.Module): The model to be trained.
+        grid (torch.Tensor): The grid used for training.
+        image (torch.Tensor): The image used for training.
+        verbose (bool, optional): If True, prints training progress. Defaults to False.
+        writer (SummaryWriter, optional): TensorBoard writer for logging. Defaults to None.
+
+    Returns:
+        float: The best PSNR achieved during training.
+    """
     context = TrainingContext()
 
     patching = config["tuning"]["patching"]
